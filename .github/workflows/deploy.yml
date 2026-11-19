@@ -7,7 +7,8 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Docker image
-        run: docker build -t ec2-dockerhub-cicd-app .
-
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -30,7 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app .
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest .
 
       - name: Push Docker image to Docker Hub
         run:  docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest
@@ -41,6 +39,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
           script: |
             docker stop ec2-dockerhub-cicd-app || true
             docker rm ec2-dockerhub-cicd-app || true
