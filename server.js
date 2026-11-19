@@ -23,7 +23,7 @@ app.get("/api/v1/patients", (req, res) => {
 });
 
 app.get("/api/v1/patients/:id", (req, res) => {
-  const patient = patients.find(p => p.id === parseInt(req.params.id));
+  const patient = patients.find((p) => p.id === parseInt(req.params.id));
   if (!patient) {
     return res.status(404).json({ message: "Patient not found" });
   }
@@ -31,7 +31,7 @@ app.get("/api/v1/patients/:id", (req, res) => {
 });
 
 app.put("/api/v1/patients/:id", (req, res) => {
-  const patient = patients.find(p => p.id === parseInt(req.params.id));
+  const patient = patients.find((p) => p.id === parseInt(req.params.id));
   if (!patient) {
     return res.status(404).json({ message: "Patient not found" });
   }
@@ -40,7 +40,9 @@ app.put("/api/v1/patients/:id", (req, res) => {
 });
 
 app.delete("/api/v1/patients/:id", (req, res) => {
-  const patientIndex = patients.findIndex(p => p.id === parseInt(req.params.id));
+  const patientIndex = patients.findIndex(
+    (p) => p.id === parseInt(req.params.id),
+  );
   if (patientIndex === -1) {
     return res.status(404).json({ message: "Patient not found" });
   }
@@ -49,7 +51,7 @@ app.delete("/api/v1/patients/:id", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Express Server is running EC2 instance" });
+  res.json({ message: "Patients API is running" });
 });
 
 app.listen(port, () => {
