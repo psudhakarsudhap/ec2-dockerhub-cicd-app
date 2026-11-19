@@ -32,7 +32,6 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run:  docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest
-      
       - name: SSH to EC2 and deploy Docker container
         uses: appleboy/ssh-action@v1
         with:
