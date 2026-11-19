@@ -4,7 +4,7 @@ const app = express();
 const port = 5000;
 
 app.get("/", (req, res) => {
-  res.json({ message: "Express Server is running" });
+  res.json({ message: "Express Server is running EC2 instance" });
 });
 
 app.listen(port, () => {
