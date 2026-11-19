@@ -1,0 +1,16 @@
+{
+  "name": "ec2-dockerhub-cicd-app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Dr P Sudhakar",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

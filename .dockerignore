@@ -1,0 +1,17 @@
+.git/
+.github/
+node_modules/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+npm-debug.log*
+coverage/
+dist/
+actions-runner/
+README.md
+.gitignore
+.dockerignore
