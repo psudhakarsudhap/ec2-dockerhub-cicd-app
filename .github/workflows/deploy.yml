@@ -39,5 +39,12 @@ jobs:
         run: |
           docker stop ec2-dockerhub-cicd-app || true
           docker rm ec2-dockerhub-cicd-app || true
+
           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest
-          docker run -d --name ec2-dockerhub-cicd-app -p 5000:5000 ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest
+
+          docker run -d \
+            --name ec2-dockerhub-cicd-app \
+            --network app-network \
+            -p 5000:5000 \
+            -e MONGO_URI=mongodb://mongodb:27017/patientsdb \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/ec2-dockerhub-cicd-app:latest
